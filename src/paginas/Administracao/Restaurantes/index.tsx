@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AdministracaoRestaurantes = () => {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);
@@ -32,6 +33,11 @@ const AdministracaoRestaurantes = () => {
           {restaurantes.map((restaurante) => (
             <TableRow key={restaurante.id}>
               <TableCell>{restaurante.nome}</TableCell>
+              <TableCell>
+                [{" "}
+                <Link to={`/admin/restaurantes/${restaurante.id}`}>Editar</Link>{" "}
+                ]
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
