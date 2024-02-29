@@ -1,21 +1,39 @@
-import IRestaurante from '../../../interfaces/IRestaurante';
-import Prato from '../Prato';
-import estilos from './Restaurante.module.scss';
+import IRestaurante from "../../../interfaces/IRestaurante";
+import Prato from "../Prato";
+import estilos from "./Restaurante.module.scss";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import IPrato from "../../../interfaces/IPrato";
 
 interface RestauranteProps {
-  restaurante: IRestaurante
+  restaurante: IRestaurante;
 }
 
 const Restaurante = ({ restaurante }: RestauranteProps) => {
+  const [pratos, setPratos] = useState<IPrato[]>([]);
 
-  return (<section className={estilos.Restaurante}>
-    <div className={estilos.Titulo}>
-      <h2>{restaurante.nome}</h2>
-    </div>
-    <div>
-      {restaurante.pratos?.map(item => <Prato prato={item} key={item.id} />)}
-    </div>
-  </section>)
-}
+  useEffect(() => {
+    axios
+      .get<IPrato[]>(
+        `http://localhost:8000/api/v1/restaurantes/${restaurante.id}/pratos/`
+      )
+      .then((response) => {
+        setPratos(response.data);
+      });
+  }, [restaurante.id]);
 
-export default Restaurante
+  return (
+    <section className={estilos.Restaurante}>
+      <div className={estilos.Titulo}>
+        <h2>{restaurante.nome}</h2>
+      </div>
+      <div>
+        {pratos?.map((item) => (
+          <Prato prato={item} key={item.id} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Restaurante;
