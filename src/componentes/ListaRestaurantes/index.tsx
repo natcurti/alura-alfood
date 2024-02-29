@@ -18,7 +18,7 @@ const ListaRestaurantes = () => {
   const [busca, setBusca] = useState("");
 
   const carregarDados = (url: string, opcoes: AxiosRequestConfig = {}) => {
-    axios.get<IPaginacao<IRestaurante>>(url).then((response) => {
+    axios.get<IPaginacao<IRestaurante>>(url, opcoes).then((response) => {
       setRestaurantes(response.data.results);
       setProxPagina(response.data.next);
       setPaginaAnterior(response.data.previous);
