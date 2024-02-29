@@ -8,24 +8,19 @@ import { IPaginacao } from "../../interfaces/IPaginacao";
 const ListaRestaurantes = () => {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);
   const [proxPagina, setProxPagina] = useState("");
+  const [paginaAnterior, setPaginaAnterior] = useState("");
 
-  useEffect(() => {
-    axios
-      .get<IPaginacao<IRestaurante>>(
-        "http://localhost:8000/api/v1/restaurantes/"
-      )
-      .then((response) => {
-        setRestaurantes(response.data.results);
-        setProxPagina(response.data.next);
-      });
-  }, []);
-
-  const verMaisRestaurantes = () => {
-    axios.get<IPaginacao<IRestaurante>>(proxPagina).then((response) => {
-      setRestaurantes([...restaurantes, ...response.data.results]);
+  const carregarDados = (url: string) => {
+    axios.get<IPaginacao<IRestaurante>>(url).then((response) => {
+      setRestaurantes(response.data.results);
       setProxPagina(response.data.next);
+      setPaginaAnterior(response.data.previous);
     });
   };
+
+  useEffect(() => {
+    carregarDados("http://localhost:8000/api/v1/restaurantes/");
+  }, []);
 
   return (
     <section className={style.ListaRestaurantes}>
@@ -35,7 +30,22 @@ const ListaRestaurantes = () => {
       {restaurantes?.map((item) => (
         <Restaurante restaurante={item} key={item.id} />
       ))}
-      {proxPagina && <button onClick={verMaisRestaurantes}>Ver mais</button>}
+      {
+        <button
+          onClick={() => carregarDados(paginaAnterior)}
+          disabled={!paginaAnterior}
+        >
+          Página Anterior
+        </button>
+      }
+      {
+        <button
+          onClick={() => carregarDados(proxPagina)}
+          disabled={!proxPagina}
+        >
+          Próxima página
+        </button>
+      }
     </section>
   );
 };
