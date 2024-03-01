@@ -10,27 +10,25 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import axios from "axios";
+import http from "../../../http";
 import { Link } from "react-router-dom";
 
 const AdministracaoRestaurantes = () => {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);
 
   useEffect(() => {
-    axios
-      .get<IRestaurante[]>("http://localhost:8000/api/v2/restaurantes/")
+    http
+      .get<IRestaurante[]>("restaurantes/")
       .then((response) => setRestaurantes(response.data));
   }, []);
 
   const excluirRestaurante = (restaurante: IRestaurante) => {
-    axios
-      .delete(`http://localhost:8000/api/v2/restaurantes/${restaurante.id}/`)
-      .then(() => {
-        const listaDeRestaurantes = restaurantes.filter(
-          (item) => item.id !== restaurante.id
-        );
-        setRestaurantes([...listaDeRestaurantes]);
-      });
+    http.delete(`restaurantes/${restaurante.id}/`).then(() => {
+      const listaDeRestaurantes = restaurantes.filter(
+        (item) => item.id !== restaurante.id
+      );
+      setRestaurantes([...listaDeRestaurantes]);
+    });
   };
 
   return (
