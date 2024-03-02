@@ -1,33 +1,32 @@
-![Integrando seu projeto React com APIs](thumbnail.png)
+# 🍴 Alfood
 
-# Alfood
+Nesse projeto realizamos um CRUD de uma API local para mostrar uma lista de restaurantes e uma lista dos respectivos pratos. Utilizando rotas, criamos uma página Admin onde é possível cadastrar novos restaurantes, cadastrar novos pratos, atualizar os restaurantes e pratos existentes e deletar caso necessário.
 
-O Alfood é um site que lista restaurantes e pratos do menu. 
-É um MVP que tá só começando e ainda tem muitas funcionalidades novas para serem desenvolvidas.
+## 💻 Tecnologias utilizadas
 
-<img src="screencapture.png" alt="Imagem do Alfood" width="50%">
+Para construção desse projeto foram utilizados:
 
+- React
+- TypeScript
+- Axios
+- React Router Dom
+- CSS Modules
+- SASS
 
-## 🔨 Funcionalidades do projeto
+## 🚀 Instalação
 
-O Alfood começa com uma listagem estática de seu conteúdo e é esse o problema que queremos resolver.
-No decorrer do curso, vamos implementar toda a camada de comunicação com a API.
+Após clonar o projeto, acesse o diretório e digite o comando abaixo para instalar as dependências necessárias:
 
-## ✔️ Técnicas e tecnologias utilizadas
+```
+npm install
+```
 
-Se liga nessa lista de tudo que usaremos nesse treinamento:
+Depois você pode rodar a aplicação com o comando:
 
-- `React`
-- `React Hooks`
-- `TypeScript`
-- `axios`
+```
+npm start
+```
 
-## 🛠️ Abrir e rodar o projeto
+## 📕 Aprendizados
 
-Para abrir e rodar o projeto, execute npm i para instalar as dependências e npm start para inicar o projeto.
-
-Depois, acesse <a href="http://localhost:3000/">http://localhost:3000/</a> no seu navegador.
-
-## 📚 Mais informações do curso
-
-Busque na plataforma da Alura o curso **Integrando seu projeto React com APIs** publicado na Escola Frontend.
+A partir de uma API local foi possível praticar as principais requisições HTTP que são o get, post, put e delete. Juntamente também pudemos praticar React Hooks como useState e useEffect, gerenciamento das rotas da aplicação, e também a tipagem com TypeScript.
