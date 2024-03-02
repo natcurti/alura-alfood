@@ -24,6 +24,7 @@ function App() {
         />
         <Route path="pratos" element={<AdministracaoPratos />} />
         <Route path="pratos/novo" element={<FormularioNovoPrato />} />
+        <Route path="pratos/:id" element={<FormularioNovoPrato />} />
       </Route>
     </Routes>
   );
