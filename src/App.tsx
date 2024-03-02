@@ -5,6 +5,7 @@ import AdministracaoRestaurantes from "./paginas/Administracao/Restaurantes";
 import FormularioNovoRestaurante from "./paginas/Administracao/FormularioNovoRestaurante";
 import PaginaBaseAdmin from "./paginas/Administracao/PaginaBaseAdmin";
 import AdministracaoPratos from "./paginas/Administracao/Pratos";
+import FormularioNovoPrato from "./paginas/Administracao/FormularioNovoPrato";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           element={<FormularioNovoRestaurante />}
         />
         <Route path="pratos" element={<AdministracaoPratos />} />
+        <Route path="pratos/novo" element={<FormularioNovoPrato />} />
       </Route>
     </Routes>
   );
