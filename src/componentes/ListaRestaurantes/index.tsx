@@ -4,7 +4,7 @@ import Restaurante from "./Restaurante";
 import { useEffect, useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import { IPaginacao } from "../../interfaces/IPaginacao";
-import { Button, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 
 interface IParametrosBusca {
   ordering?: string;
@@ -50,31 +50,33 @@ const ListaRestaurantes = () => {
       <h1>
         Os restaurantes mais <em>bacanas</em>!
       </h1>
+      <h2>Busque seu restaurante preferido:</h2>
       <form onSubmit={buscarRestaurante}>
-        <h2>Busque seu restaurante preferido:</h2>
-        <TextField
-          id="outlined-basic"
-          label="Restaurante"
-          variant="outlined"
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-        />
-        <div>
-          <label htmlFor="select-ordenacao">Ordenação</label>
-          <select
-            name="select-ordenacao"
-            id="select-ordenacao"
-            value={ordenacao}
-            onChange={(evento) => setOrdenacao(evento.target.value)}
-          >
-            <option value="">Padrão</option>
-            <option value="id">Por ID</option>
-            <option value="nome">Por Nome</option>
-          </select>
-        </div>
-        <Button variant="outlined" type="submit">
-          Buscar
-        </Button>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <TextField
+            id="outlined-basic"
+            label="Restaurante"
+            variant="outlined"
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+          />
+          <div>
+            <label htmlFor="select-ordenacao">Ordenação</label>
+            <select
+              name="select-ordenacao"
+              id="select-ordenacao"
+              value={ordenacao}
+              onChange={(evento) => setOrdenacao(evento.target.value)}
+            >
+              <option value="">Padrão</option>
+              <option value="id">Por ID</option>
+              <option value="nome">Por Nome</option>
+            </select>
+          </div>
+          <Button variant="outlined" type="submit">
+            Buscar
+          </Button>
+        </Stack>
       </form>
       {restaurantes?.map((item) => (
         <Restaurante restaurante={item} key={item.id} />
