@@ -41,6 +41,30 @@ const FormularioNovoPrato = () => {
 
   const submeterFormulario = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("nome", nomePrato);
+    formData.append("descricao", descricao);
+    formData.append("restaurante", restaurante);
+    if (imagem) {
+      formData.append("imagem", imagem);
+    }
+    http
+      .request({
+        url: "pratos/",
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      })
+      .then(() => {
+        setNomePrato("");
+        setRestaurante("");
+        setTag("");
+        setDescricao("");
+        alert("Prato cadastrado com sucesso!");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -77,7 +101,7 @@ const FormularioNovoPrato = () => {
             onChange={(e) => setTag(e.target.value)}
           >
             {tags.map((tag) => (
-              <MenuItem value={tag.id} key={tag.id}>
+              <MenuItem value={tag.value} key={tag.id}>
                 {tag.value}
               </MenuItem>
             ))}
